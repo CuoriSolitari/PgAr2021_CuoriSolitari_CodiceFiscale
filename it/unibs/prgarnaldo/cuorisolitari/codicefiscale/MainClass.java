@@ -1,4 +1,4 @@
-package it.unibs.prgarnaldo.cuorisolitari;
+package it.unibs.prgarnaldo.cuorisolitari.codicefiscale;
 
 public class MainClass {
 
