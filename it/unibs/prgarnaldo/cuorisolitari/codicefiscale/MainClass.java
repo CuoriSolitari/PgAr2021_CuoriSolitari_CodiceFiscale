@@ -6,6 +6,7 @@ public class MainClass {
         System.out.println("Ciao");
         System.out.println("ciao lino");
         System.out.println("ciao Giuliano");
+        System.out.println("vica è un gay");
 
     }
 }
