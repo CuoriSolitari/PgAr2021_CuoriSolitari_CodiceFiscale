@@ -10,12 +10,23 @@ public class CodiceFiscale {
     private char car_ctrl;
     private String codice_fiscale;
 
+    /**
+     * Questo metodo genera una stringa che è il codice fiscale corretto dei dati della personaa
+     *
+     * @param nome
+     * @param cognome
+     * @param sesso
+     * @param data
+     * @param luogo
+     * @param carCtrl
+     * @return
+     */
 
     public String generaCF(String nome, String cognome, char sesso, Data data, String luogo, char carCtrl) {
 
         String codice_fiscale = null;
 
-        //GETTER dei 3 caratteri relativi al cognome
+    //GETTER dei 3 caratteri relativi al cognome
         for ( int i = 0; i < cognome.length(); i++ ) {
             //Si cercano 3 consonanti
             if ((int) cognome.charAt(i) != 65 && (int) cognome.charAt(i) != 69 && (int) cognome.charAt(i) != 73 && (int) cognome.charAt(i) != 79 && (int) cognome.charAt(i) != 85 && (int) cognome.charAt(i) != 97 && (int) cognome.charAt(i) != 101 && (int) cognome.charAt(i) != 105 && (int) cognome.charAt(i) != 111 && (int) cognome.charAt(i) != 117) {
@@ -35,7 +46,7 @@ public class CodiceFiscale {
                 codice_fiscale += 'X';
         }
 
-        //GETTER dei 3 caratteri relativi al nome
+    //GETTER dei 3 caratteri relativi al nome
         for ( int i = 0; i < nome.length(); i++ ) {
             //Si cercano 3 consonanti
             if ((int) nome.charAt(i) != 65 && (int) nome.charAt(i) != 69 && (int) nome.charAt(i) != 73 && (int) nome.charAt(i) != 79 && (int) nome.charAt(i) != 85 && (int) nome.charAt(i) != 97 && (int) nome.charAt(i) != 101 && (int) nome.charAt(i) != 105 && (int) nome.charAt(i) != 111 && (int) nome.charAt(i) != 117) {
@@ -55,7 +66,7 @@ public class CodiceFiscale {
                 codice_fiscale += 'X';
         }
 
-        //GETTER dei 5 caratteri relativi al giorno di nascita
+    //GETTER dei 5 caratteri relativi al giorno di nascita
         //Carattere relativo all'anno
         //codice_fiscale += data.getAnno().toString();
         //Carattere relativo al mese
