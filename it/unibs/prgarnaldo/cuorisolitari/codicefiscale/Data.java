@@ -11,4 +11,16 @@ public class Data {
         this.mese = _mese;
         this.anno = _anno;
     }
+
+    public int getGiorno() {
+        return giorno;
+    }
+
+    public int getMese() {
+        return mese;
+    }
+
+    public int getAnno() {
+        return anno;
+    }
 }
