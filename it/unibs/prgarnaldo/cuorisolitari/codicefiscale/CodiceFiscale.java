@@ -1,5 +1,7 @@
 package it.unibs.prgarnaldo.cuorisolitari.codicefiscale;
 
+import java.util.Locale;
+
 public class CodiceFiscale {
 
     private String nome;
@@ -98,7 +100,8 @@ public class CodiceFiscale {
         //lo faccio dopo
 
         //GETTER del carattere di controllo
-        //lo faccio dopo
+        codice_fiscale = codice_fiscale.toUpperCase();
+        codice_fiscale += carattereControllo(codice_fiscale);
 
         return codice_fiscale;
     }
@@ -139,5 +142,94 @@ public class CodiceFiscale {
             return true;
         }
         else return false;
+    }
+
+    public String carattereControllo(String codice) {
+        int somma = 0;
+        for ( int i = 0; i < codice.length(); i++ ) {
+            if ( i % 2 == 0 ) {
+                if ( codice.charAt(i) == 'A' || codice.charAt(i) == '0' )
+                    somma += 1;
+                else if ( codice.charAt(i) == 'B' || codice.charAt(i) == '1' )
+                    somma += 0;
+                else if ( codice.charAt(i) == 'C' || codice.charAt(i) == '2' )
+                    somma += 5;
+                else if ( codice.charAt(i) == 'D' || codice.charAt(i) == '3' )
+                    somma += 7;
+                else if ( codice.charAt(i) == 'E' || codice.charAt(i) == '4' )
+                    somma += 9;
+                else if ( codice.charAt(i) == 'F' || codice.charAt(i) == '5' )
+                    somma += 13;
+                else if ( codice.charAt(i) == 'G' || codice.charAt(i) == '6' )
+                    somma += 15;
+                else if ( codice.charAt(i) == 'H' || codice.charAt(i) == '7' )
+                    somma += 17;
+                else if ( codice.charAt(i) == 'I' || codice.charAt(i) == '8' )
+                    somma += 19;
+                else if ( codice.charAt(i) == 'J' || codice.charAt(i) == '9' )
+                    somma += 21;
+                else if ( codice.charAt(i) == 'K' )
+                    somma += 2;
+                else if ( codice.charAt(i) == 'L' )
+                    somma += 4;
+                else if ( codice.charAt(i) == 'M' )
+                    somma += 18;
+                else if ( codice.charAt(i) == 'N' )
+                    somma += 20;
+                else if ( codice.charAt(i) == 'O' )
+                    somma += 11;
+                else if ( codice.charAt(i) == 'P' )
+                    somma += 3;
+                else if ( codice.charAt(i) == 'Q' )
+                    somma += 6;
+                else if ( codice.charAt(i) == 'R' )
+                    somma += 8;
+                else if ( codice.charAt(i) == 'S' )
+                    somma += 12;
+                else if ( codice.charAt(i) == 'T' )
+                    somma += 14;
+                else if ( codice.charAt(i) == 'U' )
+                    somma += 16;
+                else if ( codice.charAt(i) == 'V' )
+                    somma += 10;
+                else if ( codice.charAt(i) == 'W' )
+                    somma += 22;
+                else if ( codice.charAt(i) == 'X' )
+                    somma += 25;
+                else if ( codice.charAt(i) == 'Y' )
+                    somma += 24;
+                else if ( codice.charAt(i) == 'Z' )
+                    somma += 23;
+            }
+            else {
+                if ( codice.charAt(i) == 'A' || codice.charAt(i) == '0' )
+                    somma += 0;
+                else if ( codice.charAt(i) == 'B' || codice.charAt(i) == '1' )
+                    somma += 1;
+                else if ( codice.charAt(i) == 'C' || codice.charAt(i) == '2' )
+                    somma += 2;
+                else if ( codice.charAt(i) == 'D' || codice.charAt(i) == '3' )
+                    somma += 3;
+                else if ( codice.charAt(i) == 'E' || codice.charAt(i) == '4' )
+                    somma += 4;
+                else if ( codice.charAt(i) == 'F' || codice.charAt(i) == '5' )
+                    somma += 5;
+                else if ( codice.charAt(i) == 'G' || codice.charAt(i) == '6' )
+                    somma += 6;
+                else if ( codice.charAt(i) == 'H' || codice.charAt(i) == '7' )
+                    somma += 7;
+                else if ( codice.charAt(i) == 'I' || codice.charAt(i) == '8' )
+                    somma += 8;
+                else if ( codice.charAt(i) == 'J' || codice.charAt(i) == '9' )
+                    somma += 9;
+                else {
+                    somma += ( (int) codice.charAt(i) - 65 );
+                }
+            }
+        }
+        int ascii = 65 + somma % 26;
+        String carattere_controllo = Integer.toString(ascii);
+
+        return carattere_controllo;
     }
 }
