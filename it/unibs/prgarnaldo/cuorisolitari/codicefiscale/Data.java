@@ -15,7 +15,7 @@ public class Data {
         this.anno = _anno;
     }
 
-    public static boolean isDateValid (int day, int mese, int year)
+    public static boolean VerificaData (int day, int mese, int year)
     {
         GregorianCalendar cal = new GregorianCalendar (year, mese - 1, day);
         cal.setLenient (false);
