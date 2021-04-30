@@ -20,22 +20,28 @@ public class Data {
         GregorianCalendar cal = new GregorianCalendar (year, mese - 1, day);
         cal.setLenient (false);
 
-        try {
+        try
+        {
             cal.get (Calendar.DATE);
             return true;
-        } catch (IllegalArgumentException e) {
+        }
+        catch (IllegalArgumentException e)
+        {
             return false;
         }
     }
-    public int getGiorno() {
+    public int getGiorno()
+    {
         return giorno;
     }
 
-    public int getMese() {
+    public int getMese()
+    {
         return mese;
     }
 
-    public int getAnno() {
+    public int getAnno()
+    {
         return anno;
     }
 }

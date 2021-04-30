@@ -29,7 +29,7 @@ public class CodiceFiscale {
     //GETTER dei 3 caratteri relativi al cognome
         for ( int i = 0; i < cognome.length(); i++ ) {
             //Si cercano 3 consonanti
-            if ((int) cognome.charAt(i) != 65 && (int) cognome.charAt(i) != 69 && (int) cognome.charAt(i) != 73 && (int) cognome.charAt(i) != 79 && (int) cognome.charAt(i) != 85 && (int) cognome.charAt(i) != 97 && (int) cognome.charAt(i) != 101 && (int) cognome.charAt(i) != 105 && (int) cognome.charAt(i) != 111 && (int) cognome.charAt(i) != 117) {
+            if ((int)cognome.charAt(i) != 65 && (int) cognome.charAt(i) != 69 && (int) cognome.charAt(i) != 73 && (int) cognome.charAt(i) != 79 && (int) cognome.charAt(i) != 85 && (int) cognome.charAt(i) != 97 && (int) cognome.charAt(i) != 101 && (int) cognome.charAt(i) != 105 && (int) cognome.charAt(i) != 111 && (int) cognome.charAt(i) != 117) {
                 if (codice_fiscale.length() < 3)
                     codice_fiscale += cognome.charAt(i);
                 else i = cognome.length();
