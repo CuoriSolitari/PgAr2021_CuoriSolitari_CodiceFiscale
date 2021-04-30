@@ -21,61 +21,84 @@ public class CodiceFiscale {
      * @param carCtrl
      * @return
      */
-    
-    public String generaCF(String nome, String cognome, char sesso, Data data, String luogo, char carCtrl) {
+
+    public String generaCF(String nome, String cognome, boolean sesso, Data data, String luogo, char carCtrl) {
 
         String codice_fiscale = null;
 
-    //GETTER dei 3 caratteri relativi al cognome
+        //GETTER dei 3 caratteri relativi al cognome
+
+        //Si cercano 3 consonanti
         for ( int i = 0; i < cognome.length(); i++ ) {
-            //Si cercano 3 consonanti
-            if ((int)cognome.charAt(i) != 65 && (int) cognome.charAt(i) != 69 && (int) cognome.charAt(i) != 73 && (int) cognome.charAt(i) != 79 && (int) cognome.charAt(i) != 85 && (int) cognome.charAt(i) != 97 && (int) cognome.charAt(i) != 101 && (int) cognome.charAt(i) != 105 && (int) cognome.charAt(i) != 111 && (int) cognome.charAt(i) != 117) {
+            if ( controllaConsonante(cognome.charAt(i)) == true ) {
                 if (codice_fiscale.length() < 3)
                     codice_fiscale += cognome.charAt(i);
                 else i = cognome.length();
             }
         }
+
         //Si passa alle vocali in caso di consonanti minori di 3
         if ( codice_fiscale.length() < 3) {
             for ( int i = 0; i < cognome.length(); i++) {
-                if ((int) cognome.charAt(i) == 65 || (int) cognome.charAt(i) == 69 || (int) cognome.charAt(i) == 73 || (int) cognome.charAt(i) == 79 || (int) cognome.charAt(i) == 85 || (int) cognome.charAt(i) == 97 || (int) cognome.charAt(i) == 101 || (int) cognome.charAt(i) == 105 || (int) cognome.charAt(i) == 111 || (int) cognome.charAt(i) == 117)
+                if ( controllaConsonante(cognome.charAt(i)) == false)
                     codice_fiscale += cognome.charAt(i);
+                if ( codice_fiscale.length() == 3)
+                    i = cognome.length();
             }
             //In caso di cognome di meno di 3 lettere si aggiunge un numero di X sufficienti
             while ( codice_fiscale.length() < 3)
                 codice_fiscale += 'X';
         }
 
-    //GETTER dei 3 caratteri relativi al nome
-        for ( int i = 0; i < nome.length(); i++ ) {
-            //Si cercano 3 consonanti
-            if ((int) nome.charAt(i) != 65 && (int) nome.charAt(i) != 69 && (int) nome.charAt(i) != 73 && (int) nome.charAt(i) != 79 && (int) nome.charAt(i) != 85 && (int) nome.charAt(i) != 97 && (int) nome.charAt(i) != 101 && (int) nome.charAt(i) != 105 && (int) nome.charAt(i) != 111 && (int) nome.charAt(i) != 117) {
-                if (codice_fiscale.length() < 6)
-                    codice_fiscale += nome.charAt(i);
-                else i = nome.length();
+        //GETTER dei 3 caratteri relativi al cognome
+
+        //Si cercano 3 consonanti
+        for ( int i = 0; i < cognome.length(); i++ ) {
+            if ( controllaConsonante(cognome.charAt(i)) == true ) {
+                if (codice_fiscale.length() < 3)
+                    codice_fiscale += cognome.charAt(i);
+                else i = cognome.length();
             }
         }
+
         //Si passa alle vocali in caso di consonanti minori di 3
-        if ( codice_fiscale.length() < 6) {
-            for ( int i = 0; i < nome.length(); i++) {
-                if ((int) nome.charAt(i) == 65 || (int) nome.charAt(i) == 69 || (int) nome.charAt(i) == 73 || (int) nome.charAt(i) == 79 || (int) nome.charAt(i) == 85 || (int) nome.charAt(i) == 97 || (int) nome.charAt(i) == 101 || (int) nome.charAt(i) == 105 || (int) nome.charAt(i) == 111 || (int) nome.charAt(i) == 117)
-                    codice_fiscale += nome.charAt(i);
+        if ( codice_fiscale.length() < 3) {
+            for ( int i = 0; i < cognome.length(); i++) {
+                if ( controllaConsonante(cognome.charAt(i)) == false)
+                    codice_fiscale += cognome.charAt(i);
+                if ( codice_fiscale.length() == 3)
+                    i = cognome.length();
             }
             //In caso di cognome di meno di 3 lettere si aggiunge un numero di X sufficienti
-            while ( codice_fiscale.length() < 6)
+            while ( codice_fiscale.length() < 3)
                 codice_fiscale += 'X';
         }
 
-    //GETTER dei 5 caratteri relativi al giorno di nascita
+        //GETTER dei 5 caratteri relativi al giorno di nascita
+
         //Carattere relativo all'anno
-        //codice_fiscale += data.getAnno().toString();
+        String anno = String.valueOf(data.getAnno());
+        codice_fiscale += anno.charAt(2) + anno.charAt(3);
+
         //Carattere relativo al mese
-        codice_fiscale += data.getMese();
+        codice_fiscale += data.getCarattere_mese();
+
         //Carattere relativo al giorno
-        //if ( sesso == true )
+        if ( sesso == true ) {
+            String giorno = String.valueOf(data.getGiorno());
             codice_fiscale += data.getGiorno();
-        //else
-        //    codice_fiscale += (data.getGiorno() + 40).toString();
+        }
+        else {
+            int day = data.getGiorno() + 40;
+            String giorno = String.valueOf(day);
+            codice_fiscale += giorno;
+        }
+
+        //GETTER dei 4 caratteri relativi al comune di nascita
+        //lo faccio dopo
+
+        //GETTER del carattere di controllo
+        //lo faccio dopo
 
         return codice_fiscale;
     }
@@ -108,7 +131,13 @@ public class CodiceFiscale {
                     return false;
             }
         }
-
         return true;
+    }
+
+    public boolean controllaConsonante(char lettera) {
+        if ( lettera != 'A' && lettera != 'E' && lettera != 'I' && lettera != 'O' && lettera != 'U' && lettera != 'a' && lettera != 'e' && lettera != 'i' && lettera != 'o' && lettera != 'u') {
+            return true;
+        }
+        else return false;
     }
 }

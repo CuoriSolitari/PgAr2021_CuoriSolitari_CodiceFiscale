@@ -8,17 +8,17 @@ public class MainClass {
         int day;
         day = 30;
         int year;
-        year=2020;
-        int moth;
-        moth=3;
+        year = 2020;
+        int month;
+        month = 3;
 
 
-        boolean b = Data.verificaData(day,moth,year);
-        if(b==false)
+        boolean b = Data.VerificaData(day,month,year);
+        if ( b == false )
             System.out.println("data non valida");
         else
             System.out.println("data corretta");
-        if(moth==2 && day > 29)
+        if ( month==2 && day > 29 )
             System.out.println("il mese di febbraio ha al massimo 29 giorni");
 
 
@@ -26,6 +26,7 @@ public class MainClass {
         if (a==false) System.out.println("ciao");
         else System.out.println("bella");
 
-
+        Data data = new Data( day, month, year);
+        System.out.println(data.getCarattere_mese());
     }
 }
