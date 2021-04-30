@@ -25,5 +25,7 @@ public class MainClass {
         boolean a = CodiceFiscale.verificaCF(prova);
         if (a==false) System.out.println("ciao");
         else System.out.println("bella");
+
+
     }
 }
