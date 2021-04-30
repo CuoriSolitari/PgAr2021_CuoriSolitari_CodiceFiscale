@@ -13,7 +13,7 @@ public class MainClass {
         moth=3;
 
 
-        boolean b = Data.VerificaData(day,moth,year);
+        boolean b = Data.verificaData(day,moth,year);
         if(b==false)
             System.out.println("data non valida");
         else

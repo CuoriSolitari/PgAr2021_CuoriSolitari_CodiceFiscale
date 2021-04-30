@@ -15,7 +15,15 @@ public class Data {
         this.anno = _anno;
     }
 
-    public static boolean VerificaData (int day, int mese, int year)
+    /**
+     * Questo metodo permette di verificare se una data è valida o no
+     *
+     * @param day
+     * @param mese
+     * @param year
+     * @return
+     */
+    public static boolean verificaData(int day, int mese, int year)
     {
         GregorianCalendar cal = new GregorianCalendar (year, mese - 1, day);
         cal.setLenient (false);
@@ -30,6 +38,7 @@ public class Data {
             return false;
         }
     }
+
     public int getGiorno()
     {
         return giorno;

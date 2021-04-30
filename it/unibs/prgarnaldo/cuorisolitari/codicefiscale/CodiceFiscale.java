@@ -21,7 +21,7 @@ public class CodiceFiscale {
      * @param carCtrl
      * @return
      */
-
+    
     public String generaCF(String nome, String cognome, char sesso, Data data, String luogo, char carCtrl) {
 
         String codice_fiscale = null;
