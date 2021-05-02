@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 public class Xml {
 
-    public static ArrayList<Persona>  Readfile() {
+    public static ArrayList<Persona> ReadPersone() {
 
         ArrayList<Persona> persone = new ArrayList<>();
         File file = new File("it/unibs/prgarnaldo/cuorisolitari/codicefiscale/inputPersone.xml");
@@ -31,7 +31,6 @@ public class Xml {
                 switch (xmlr.getEventType()){
 
                     case XMLStreamConstants.START_DOCUMENT:
-                        System.out.println("Start Read Doc " + file);
                         break;
                     case XMLStreamConstants.START_ELEMENT:
                         if ((xmlr.getLocalName()) == "nome") {
@@ -69,8 +68,6 @@ public class Xml {
                         System.out.println("// commento " + xmlr.getText());
                         break;
                     case XMLStreamConstants.CHARACTERS:
-                        if (xmlr.getText().trim().length() > 0)
-                            System.out.println("-> " + xmlr.getText());
                         break;
                 }
                 xmlr.next();

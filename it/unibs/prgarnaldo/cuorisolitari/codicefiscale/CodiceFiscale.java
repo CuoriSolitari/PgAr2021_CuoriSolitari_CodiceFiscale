@@ -1,5 +1,13 @@
 package it.unibs.prgarnaldo.cuorisolitari.codicefiscale;
 
+import javax.xml.stream.XMLInputFactory;
+import javax.xml.stream.XMLStreamConstants;
+import javax.xml.stream.XMLStreamException;
+import javax.xml.stream.XMLStreamReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.Locale;
 
 public class CodiceFiscale {
@@ -12,13 +20,12 @@ public class CodiceFiscale {
      * Questo metodo genera una stringa che è il codice fiscale corretto dei dati della personaa
      *
      * @param persona
-     * @param carCtrl
      * @return
      */
 
-    public String generaCF(Persona persona, char carCtrl) {
+    public static String generaCF(Persona persona) {
 
-        String codice_fiscale = null;
+        String codice_fiscale = "";
 
         //GETTER dei 3 caratteri relativi al cognome
 
@@ -70,9 +77,11 @@ public class CodiceFiscale {
 
         //GETTER dei 5 caratteri relativi al giorno di nascita
 
+
         //Carattere relativo all'anno
         String anno = String.valueOf(persona.getData().getAnno());
-        codice_fiscale += anno.charAt(2) + anno.charAt(3);
+        String year = String.valueOf(anno.charAt(2)) + anno.charAt(3);
+        codice_fiscale += year;
 
         //Carattere relativo al mese
         codice_fiscale += persona.getData().getCarattere_mese();
@@ -89,7 +98,7 @@ public class CodiceFiscale {
         }
 
         //GETTER dei 4 caratteri relativi al comune di nascita
-        //lo faccio dopo
+        codice_fiscale += CaratteriLuogo(persona.getLuogo());
 
         //GETTER del carattere di controllo
         codice_fiscale = codice_fiscale.toUpperCase();
@@ -129,7 +138,7 @@ public class CodiceFiscale {
         return true;
     }
 
-    public boolean controllaConsonante(char lettera) {
+    public static boolean controllaConsonante(char lettera) {
         if ( lettera != 'A' && lettera != 'E' && lettera != 'I' && lettera != 'O' && lettera != 'U' && lettera != 'a' && lettera != 'e' && lettera != 'i' && lettera != 'o' && lettera != 'u') {
             return true;
         }
@@ -142,7 +151,7 @@ public class CodiceFiscale {
      * @param codice
      * @return
      */
-    public String carattereControllo(String codice) {
+    public static String carattereControllo(String codice) {
 
         int somma = 0;
         int[] array_dispari = new int[]{1, 0, 5, 7, 9, 13, 15, 17, 19, 21, 2, 4, 18, 20, 11, 3, 6, 8, 12, 14, 16, 10, 22, 25, 24, 23};
@@ -166,9 +175,58 @@ public class CodiceFiscale {
             }
         }
         //il carattere di controllo avrà come codice ASCII il codice della A + il resto di somma/26
-        int ascii = 65 + somma % 26;
-        String carattere_controllo = Integer.toString(ascii);
+        int ascii = 65 + (somma % 26);
+        String carattere_controllo = Character.toString(ascii);
 
         return carattere_controllo;
+    }
+
+    public static String CaratteriLuogo(String luogo_persona) {
+
+        File file = new File("it/unibs/prgarnaldo/cuorisolitari/codicefiscale/comuni.xml");
+        XMLInputFactory xmlif = null;
+        XMLStreamReader xmlr = null;
+        String codice = "";
+
+        try {
+            xmlif = XMLInputFactory.newInstance();
+            xmlr = xmlif.createXMLStreamReader(String.valueOf(file), new FileInputStream(file));
+            while (xmlr.hasNext()){
+
+                switch (xmlr.getEventType()){
+
+                    case XMLStreamConstants.START_DOCUMENT:
+                        break;
+                    case XMLStreamConstants.START_ELEMENT:
+                        if ((xmlr.getLocalName()) == "nome") {
+                            xmlr.next();
+                            if ( luogo_persona == xmlr.getText() ) {
+                                xmlr.next();
+                                xmlr.next();
+                                xmlr.next();
+                                codice = xmlr.getText();
+                            }
+                        }
+                        break;
+                    case XMLStreamConstants.END_ELEMENT:
+                        break;
+                    case XMLStreamConstants.COMMENT:
+                        System.out.println("// commento " + xmlr.getText());
+                        break;
+                    case XMLStreamConstants.CHARACTERS:
+                        break;
+                }
+                xmlr.next();
+            }
+            xmlr.close();
+        }
+
+
+        catch (FileNotFoundException | XMLStreamException e) {
+            System.out.println("Errore nell'inizializzazione del reader:");
+            System.out.println(e.getMessage());
+        }
+
+        return codice;
     }
 }
