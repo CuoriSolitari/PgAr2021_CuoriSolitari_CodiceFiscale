@@ -88,8 +88,10 @@ public class CodiceFiscale {
 
         //Carattere relativo al giorno
         if (persona.isSesso() == true ) {
-            String giorno = String.valueOf(persona.getData().getGiorno());
-            codice_fiscale += persona.getData().getGiorno();
+            if ( persona.getData().getGiorno() < 10 )
+                codice_fiscale = codice_fiscale + "0" + persona.getData().getGiorno();
+            else codice_fiscale += persona.getData().getGiorno();
+
         }
         else {
             int day = persona.getData().getGiorno() + 40;
@@ -186,7 +188,8 @@ public class CodiceFiscale {
         File file = new File("it/unibs/prgarnaldo/cuorisolitari/codicefiscale/comuni.xml");
         XMLInputFactory xmlif = null;
         XMLStreamReader xmlr = null;
-        String codice = "";
+        String codice = null;
+        luogo_persona = luogo_persona.toUpperCase(Locale.ROOT);
 
         try {
             xmlif = XMLInputFactory.newInstance();
@@ -198,9 +201,12 @@ public class CodiceFiscale {
                     case XMLStreamConstants.START_DOCUMENT:
                         break;
                     case XMLStreamConstants.START_ELEMENT:
+
                         if ((xmlr.getLocalName()) == "nome") {
                             xmlr.next();
-                            if ( luogo_persona == xmlr.getText() ) {
+
+                            if ( xmlr.getText().equals(luogo_persona) ) {
+                                xmlr.next();
                                 xmlr.next();
                                 xmlr.next();
                                 xmlr.next();

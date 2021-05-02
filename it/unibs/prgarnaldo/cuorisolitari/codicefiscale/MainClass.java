@@ -13,6 +13,7 @@ public class MainClass {
             System.out.println(p.toString());
         }
 
-        System.out.println(CodiceFiscale.generaCF(persone.get(0)));
+        for ( int i = 0; i < persone.size(); i++ )
+            System.out.println(CodiceFiscale.generaCF(persone.get(i)));
     }
 }
