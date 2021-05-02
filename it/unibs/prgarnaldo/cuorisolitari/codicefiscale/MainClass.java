@@ -1,11 +1,6 @@
 package it.unibs.prgarnaldo.cuorisolitari.codicefiscale;
 
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamException;
-import javax.xml.stream.XMLStreamReader;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
 /*import org.w3c.dom.Document;
@@ -46,7 +41,7 @@ public class MainClass {
         if (a==false) System.out.println("ciao");
         else System.out.println("bella");
 
-         Xlm lettura= Xlm.Readfile();
+         Xml.Readfile();
 
         Data data = new Data( day, month, year);
         System.out.println(data.getCarattere_mese());
