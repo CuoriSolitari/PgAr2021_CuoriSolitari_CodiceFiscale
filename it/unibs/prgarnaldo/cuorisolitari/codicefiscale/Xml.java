@@ -11,6 +11,11 @@ import java.util.ArrayList;
 
 public class Xml {
 
+    /**
+     * Legge il file inputPersone.xml e aggiunge tutti i dati in un array di persone
+     *
+     * @return persone
+     */
     public static ArrayList<Persona> ReadPersone() {
 
         ArrayList<Persona> persone = new ArrayList<>();

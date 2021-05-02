@@ -7,8 +7,6 @@ import javax.xml.stream.XMLStreamReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.Locale;
 
 public class CodiceFiscale {
 
@@ -181,6 +179,12 @@ public class CodiceFiscale {
         return carattere_controllo;
     }
 
+    /**
+     * Legge prendendo in input il nome del comune e restituisce il codice del comune
+     *
+     * @param
+     * @return codice_comune
+     */
     public static String CaratteriLuogo(String luogo_persona) {
 
         File file = new File("it/unibs/prgarnaldo/cuorisolitari/codicefiscale/comuni.xml");

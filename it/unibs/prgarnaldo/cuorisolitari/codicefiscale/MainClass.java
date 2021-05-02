@@ -9,6 +9,8 @@ public class MainClass {
     public static void main(String[] args) throws XMLStreamException, FileNotFoundException {
 
         ArrayList<Persona> persone = Xml.ReadPersone();
+
+
         for (Persona p: persone){
             System.out.println(p.toString());
         }
