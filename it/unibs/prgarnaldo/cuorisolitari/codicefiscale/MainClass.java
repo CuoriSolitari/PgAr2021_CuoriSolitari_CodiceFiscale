@@ -1,8 +1,28 @@
 package it.unibs.prgarnaldo.cuorisolitari.codicefiscale;
 
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.stream.XMLInputFactory;
+import javax.xml.stream.XMLStreamException;
+import javax.xml.stream.XMLStreamReader;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+
+/*import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import java.io.IOException;
+*/
 public class MainClass {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws XMLStreamException, FileNotFoundException {
+
         String prova = "FRMPLA01D26D434N";
 
         int day;
@@ -25,6 +45,8 @@ public class MainClass {
         boolean a = CodiceFiscale.verificaCF(prova);
         if (a==false) System.out.println("ciao");
         else System.out.println("bella");
+
+         Xlm lettura= Xlm.Readfile();
 
         Data data = new Data( day, month, year);
         System.out.println(data.getCarattere_mese());
