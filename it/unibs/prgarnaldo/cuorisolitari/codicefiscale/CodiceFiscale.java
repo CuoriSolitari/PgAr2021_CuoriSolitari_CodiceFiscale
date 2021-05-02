@@ -8,7 +8,6 @@ public class CodiceFiscale {
     private char car_ctrl;
     private String codice_fiscale;
 
-
     /**
      * Questo metodo genera una stringa che è il codice fiscale corretto dei dati della personaa
      *

@@ -7,14 +7,21 @@ import javax.xml.stream.XMLStreamReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 
 public class Xml {
 
-    public static void  Readfile() {
+    public static ArrayList<Persona>  Readfile() {
 
+        ArrayList<Persona> persone = new ArrayList<>();
         File file = new File("it/unibs/prgarnaldo/cuorisolitari/codicefiscale/inputPersone.xml");
         XMLInputFactory xmlif = null;
         XMLStreamReader xmlr = null;
+        String nome_persona = null;
+        String cognome_persona = null;
+        String sesso_persona = null;
+        Data data_persona= null;
+        String luogo_persona = null;
 
         try {
             xmlif = XMLInputFactory.newInstance();
@@ -27,12 +34,36 @@ public class Xml {
                         System.out.println("Start Read Doc " + file);
                         break;
                     case XMLStreamConstants.START_ELEMENT:
-                        System.out.println("Tag " + xmlr.getLocalName());
-                        for (int i = 0; i < xmlr.getAttributeCount(); i++)
-                            System.out.printf(" => attributo %s->%s%n", xmlr.getAttributeLocalName(i), xmlr.getAttributeValue(i));
+                        if ((xmlr.getLocalName()) == "nome") {
+                            xmlr.next();
+                            nome_persona = xmlr.getText();
+                        } else if ((xmlr.getLocalName()) == "cognome") {
+                            xmlr.next();
+                            cognome_persona = xmlr.getText();
+                        } else if (xmlr.getLocalName() == "sesso") {
+                            xmlr.next();
+                            sesso_persona = xmlr.getText();
+                        } else if ((xmlr.getLocalName()) == "data_nascita") {
+                            xmlr.next();
+                            String data = xmlr.getText();
+                            //Esclude il carattere - e crea una data da una stringa a interi
+                            String[] splitArray = data.split("-");
+                            int anno = Integer.parseInt(splitArray[0]);
+                            int mese = Integer.parseInt(splitArray[1]);
+                            int giorno = Integer.parseInt(splitArray[2]);
+                            data_persona = new Data(giorno, mese, anno);
+                        } else if ((xmlr.getLocalName()) == "comune_nascita") {
+                            xmlr.next();
+                            luogo_persona = xmlr.getText();
+                        }
                         break;
                     case XMLStreamConstants.END_ELEMENT:
-                        System.out.println("END-Tag " + xmlr.getLocalName());
+                        if ((xmlr.getLocalName()) == "persona")
+                        {
+                            Persona persona = new Persona(nome_persona, cognome_persona, sesso_persona, data_persona, luogo_persona);
+                            persone.add(persona);
+                        }
+
                         break;
                     case XMLStreamConstants.COMMENT:
                         System.out.println("// commento " + xmlr.getText());
@@ -41,7 +72,6 @@ public class Xml {
                         if (xmlr.getText().trim().length() > 0)
                             System.out.println("-> " + xmlr.getText());
                         break;
-
                 }
                 xmlr.next();
             }
@@ -54,7 +84,7 @@ public class Xml {
             System.out.println(e.getMessage());
         }
 
-
+        return persone;
     }
 
 }
