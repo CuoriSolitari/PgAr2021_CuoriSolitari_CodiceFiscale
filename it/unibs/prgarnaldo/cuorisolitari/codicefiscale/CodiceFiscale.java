@@ -4,11 +4,7 @@ import java.util.Locale;
 
 public class CodiceFiscale {
 
-    private String nome;
-    private String cognome;
-    private boolean sesso;
-    private Data data;
-    private String luogo;
+    private Persona persona;
     private char car_ctrl;
     private String codice_fiscale;
 
@@ -16,83 +12,79 @@ public class CodiceFiscale {
     /**
      * Questo metodo genera una stringa che è il codice fiscale corretto dei dati della personaa
      *
-     * @param nome
-     * @param cognome
-     * @param sesso
-     * @param data
-     * @param luogo
+     * @param persona
      * @param carCtrl
      * @return
      */
 
-    public String generaCF(String nome, String cognome, boolean sesso, Data data, String luogo, char carCtrl) {
+    public String generaCF(Persona persona, char carCtrl) {
 
         String codice_fiscale = null;
 
         //GETTER dei 3 caratteri relativi al cognome
 
         //Si cercano 3 consonanti
-        for ( int i = 0; i < cognome.length(); i++ ) {
-            if ( controllaConsonante(cognome.charAt(i)) == true ) {
+        for ( int i = 0; i < persona.getCognome().length(); i++ ) {
+            if ( controllaConsonante(persona.getCognome().charAt(i)) == true ) {
                 if (codice_fiscale.length() < 3)
-                    codice_fiscale += cognome.charAt(i);
-                else i = cognome.length();
+                    codice_fiscale += persona.getCognome().charAt(i);
+                else i = persona.getCognome().length();
             }
         }
 
         //Si passa alle vocali in caso di consonanti minori di 3
         if ( codice_fiscale.length() < 3) {
-            for ( int i = 0; i < cognome.length(); i++) {
-                if ( controllaConsonante(cognome.charAt(i)) == false)
-                    codice_fiscale += cognome.charAt(i);
+            for ( int i = 0; i < persona.getCognome().length(); i++) {
+                if ( controllaConsonante(persona.getCognome().charAt(i)) == false)
+                    codice_fiscale += persona.getCognome().charAt(i);
                 if ( codice_fiscale.length() == 3)
-                    i = cognome.length();
+                    i = persona.getCognome().length();
             }
             //In caso di cognome di meno di 3 lettere si aggiunge un numero di X sufficienti
             while ( codice_fiscale.length() < 3)
                 codice_fiscale += 'X';
         }
 
-        //GETTER dei 3 caratteri relativi al cognome
+        //GETTER dei 3 caratteri relativi al nome
 
         //Si cercano 3 consonanti
-        for ( int i = 0; i < cognome.length(); i++ ) {
-            if ( controllaConsonante(cognome.charAt(i)) == true ) {
-                if (codice_fiscale.length() < 3)
-                    codice_fiscale += cognome.charAt(i);
-                else i = cognome.length();
+        for ( int i = 0; i < persona.getNome().length(); i++ ) {
+            if ( controllaConsonante(persona.getNome().charAt(i)) == true ) {
+                if (codice_fiscale.length() < 6)
+                    codice_fiscale += persona.getNome().charAt(i);
+                else i = persona.getNome().length();
             }
         }
 
         //Si passa alle vocali in caso di consonanti minori di 3
-        if ( codice_fiscale.length() < 3) {
-            for ( int i = 0; i < cognome.length(); i++) {
-                if ( controllaConsonante(cognome.charAt(i)) == false)
-                    codice_fiscale += cognome.charAt(i);
-                if ( codice_fiscale.length() == 3)
-                    i = cognome.length();
+        if ( codice_fiscale.length() < 6) {
+            for ( int i = 0; i < persona.getNome().length(); i++) {
+                if ( controllaConsonante(persona.getNome().charAt(i)) == false)
+                    codice_fiscale += persona.getNome().charAt(i);
+                if ( codice_fiscale.length() == 6)
+                    i = persona.getNome().length();
             }
             //In caso di cognome di meno di 3 lettere si aggiunge un numero di X sufficienti
-            while ( codice_fiscale.length() < 3)
+            while ( codice_fiscale.length() < 6)
                 codice_fiscale += 'X';
         }
 
         //GETTER dei 5 caratteri relativi al giorno di nascita
 
         //Carattere relativo all'anno
-        String anno = String.valueOf(data.getAnno());
+        String anno = String.valueOf(persona.getData().getAnno());
         codice_fiscale += anno.charAt(2) + anno.charAt(3);
 
         //Carattere relativo al mese
-        codice_fiscale += data.getCarattere_mese();
+        codice_fiscale += persona.getData().getCarattere_mese();
 
         //Carattere relativo al giorno
-        if ( sesso == true ) {
-            String giorno = String.valueOf(data.getGiorno());
-            codice_fiscale += data.getGiorno();
+        if (persona.isSesso() == true ) {
+            String giorno = String.valueOf(persona.getData().getGiorno());
+            codice_fiscale += persona.getData().getGiorno();
         }
         else {
-            int day = data.getGiorno() + 40;
+            int day = persona.getData().getGiorno() + 40;
             String giorno = String.valueOf(day);
             codice_fiscale += giorno;
         }

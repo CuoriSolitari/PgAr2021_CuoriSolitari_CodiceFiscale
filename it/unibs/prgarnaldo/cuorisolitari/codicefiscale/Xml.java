@@ -1,4 +1,5 @@
-package it.unibs.prgarnaldo.cuorisolitari.codicefiscale;
+package it.unibs.fp.data;
+
 
 
 import javax.xml.stream.XMLInputFactory;
@@ -13,7 +14,11 @@ public class Xml {
 
     public static void  Readfile() {
 
+<<<<<<< HEAD
         File file = new File("it/unibs/prgarnaldo/cuorisolitari/codicefiscale/inputPersone.xml");
+=======
+        File file = new File("inputPersone.xml");
+>>>>>>> 643ebf2c51e0db0a145bb087808c75bfc0ab659f
         XMLInputFactory xmlif = null;
         XMLStreamReader xmlr = null;
 
@@ -49,11 +54,17 @@ public class Xml {
             xmlr.close();
         }
 
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> 643ebf2c51e0db0a145bb087808c75bfc0ab659f
         catch (FileNotFoundException | XMLStreamException e) {
             System.out.println("Errore nell'inizializzazione del reader:");
             System.out.println(e.getMessage());
         }
 
+<<<<<<< HEAD
 
     }
 
@@ -61,5 +72,9 @@ public class Xml {
 
 
 
+=======
+>>>>>>> 643ebf2c51e0db0a145bb087808c75bfc0ab659f
 
+    }
 
+}
