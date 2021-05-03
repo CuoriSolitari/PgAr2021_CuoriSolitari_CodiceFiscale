@@ -89,6 +89,11 @@ public class Xml {
         return persone;
     }
 
+    /**
+     * Legge il file codiciFiscali.xml e aggiunge tutti i dati in un array di stringhe
+     *
+     * @return arrayCF
+     */
     public static ArrayList<String> readCF() {
 
         ArrayList<String> arrayCF = new ArrayList<>();
