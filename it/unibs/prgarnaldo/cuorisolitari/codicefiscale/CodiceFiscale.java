@@ -99,7 +99,7 @@ public class CodiceFiscale {
         }
 
         //GETTER dei 4 caratteri relativi al comune di nascita
-        codice_fiscale += CaratteriLuogo(persona.getLuogo());
+        codice_fiscale += caratteriLuogo(persona.getLuogo());
 
         //GETTER del carattere di controllo
         codice_fiscale = codice_fiscale.toUpperCase();
@@ -135,6 +135,37 @@ public class CodiceFiscale {
                 if(codice.charAt(i)<48 || codice.charAt(i)>57)
                     return false;
             }
+            //Controllo della data
+            int giorno = (codice.charAt(6)*10) + codice.charAt(7);
+            char c_mese = codice.charAt(8);
+            int mese = 0;
+            if (c_mese == 'A')
+                mese = 1 ;
+            else if (c_mese == 'B')
+                mese = 2 ;
+            else if (c_mese == 'C')
+                mese = 3 ;
+            else if (c_mese == 'D')
+                mese = 4 ;
+            else if (c_mese == 'E')
+                mese = 5 ;
+            else if (c_mese == 'H')
+                mese = 6 ;
+            else if ( c_mese == 'L')
+                mese = 7 ;
+            else if ( c_mese == 'M' )
+                mese = 8;
+            else if ( c_mese == 'P' )
+                mese = 9;
+            else if ( c_mese == 'R'  )
+                mese = 10;
+            else if ( c_mese == 'S' )
+                mese = 11;
+            else if ( c_mese == 'T' )
+                mese = 12;
+            if(Data.verificaData(giorno, mese) == false)
+                return false;
+
         }
         return true;
     }
@@ -188,7 +219,7 @@ public class CodiceFiscale {
      * @param
      * @return codice_comune
      */
-    public static String CaratteriLuogo(String luogo_persona) {
+    public static String caratteriLuogo(String luogo_persona) {
 
         File file = new File("it/unibs/prgarnaldo/cuorisolitari/codicefiscale/comuni.xml");
         XMLInputFactory xmlif = null;

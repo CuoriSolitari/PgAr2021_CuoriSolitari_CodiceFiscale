@@ -10,7 +10,6 @@ public class MainClass {
 
         ArrayList<Persona> persone = Xml.ReadPersone();
 
-
         for (Persona p: persone){
             System.out.println(p.toString());
         }

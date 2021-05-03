@@ -1,8 +1,5 @@
 package it.unibs.prgarnaldo.cuorisolitari.codicefiscale;
 
-import java.util.Calendar;
-import java.util.GregorianCalendar;
-
 public class Data {
 
     private int giorno;
@@ -43,20 +40,19 @@ public class Data {
         return carattere_mese;
     }
 
-    public static boolean VerificaData (int day, int mese, int year)
-    {
-        GregorianCalendar cal = new GregorianCalendar (year, mese - 1, day);
-        cal.setLenient (false);
-
-        try
-        {
-            cal.get (Calendar.DATE);
-            return true;
+    public static boolean verificaData (int giorno, int mese){
+        if (mese == 2){
+            if(giorno < 28)
+                return false;
         }
-        catch (IllegalArgumentException e)
-        {
-            return false;
+        else if (mese == 4 || mese == 6 || mese == 11 || mese == 9){
+            if(giorno < 30)
+                return false;
+        } else {
+            if(giorno < 31)
+                return false;
         }
+        return true;
     }
 
     public int getGiorno() {
