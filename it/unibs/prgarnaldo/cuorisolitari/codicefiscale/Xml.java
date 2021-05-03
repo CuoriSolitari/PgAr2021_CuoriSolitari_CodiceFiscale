@@ -89,5 +89,56 @@ public class Xml {
         return persone;
     }
 
+    public static ArrayList<String> readCF() {
+
+        ArrayList<String> arrayCF = new ArrayList<>();
+
+        File file = new File("it/unibs/prgarnaldo/cuorisolitari/codicefiscale/codiciFiscali.xml");
+        XMLInputFactory xmlif = null;
+        XMLStreamReader xmlr = null;
+        String codice = null;
+
+        try {
+            xmlif = XMLInputFactory.newInstance();
+            xmlr = xmlif.createXMLStreamReader(String.valueOf(file), new FileInputStream(file));
+            while (xmlr.hasNext()){
+
+                switch (xmlr.getEventType()){
+
+                    case XMLStreamConstants.START_DOCUMENT:
+                        break;
+                    case XMLStreamConstants.START_ELEMENT:
+                        if ((xmlr.getLocalName()) == "codice") {
+                            xmlr.next();
+                            codice = xmlr.getText();
+                        }
+                        break;
+                    case XMLStreamConstants.END_ELEMENT:
+                        if ((xmlr.getLocalName()) == "codice"){
+                            arrayCF.add(codice);
+                        }
+
+                        break;
+                    case XMLStreamConstants.COMMENT:
+                        System.out.println("// commento " + xmlr.getText());
+                        break;
+                    case XMLStreamConstants.CHARACTERS:
+                        break;
+                }
+                xmlr.next();
+            }
+            xmlr.close();
+        }
+
+
+        catch (FileNotFoundException | XMLStreamException e) {
+            System.out.println("Errore nell'inizializzazione del reader:");
+            System.out.println(e.getMessage());
+        }
+
+
+        return arrayCF;
+    }
+
 }
 
