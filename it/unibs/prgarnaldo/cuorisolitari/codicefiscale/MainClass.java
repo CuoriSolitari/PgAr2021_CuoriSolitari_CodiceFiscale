@@ -28,8 +28,12 @@ public class MainClass {
             }
             //COMANDO 2: stampa codiciFiscali.xml
             else if(comando == 2){
-                for(String codici: codici_fiscali)
-                    System.out.println(codici);
+                for(String codice: codici_fiscali) {
+                    boolean valido;
+                    valido = CodiceFiscale.verificaCF(codice);
+                    System.out.println(codice + " " + valido);
+                }
+
             }
 
         } while(comando != 4);
