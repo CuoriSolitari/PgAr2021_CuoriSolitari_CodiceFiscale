@@ -139,32 +139,13 @@ public class CodiceFiscale {
             int giorno = (codice.charAt(6)*10) + codice.charAt(7);
             char c_mese = codice.charAt(8);
             int mese = 0;
-            if (c_mese == 'A')
-                mese = 1 ;
-            else if (c_mese == 'B')
-                mese = 2 ;
-            else if (c_mese == 'C')
-                mese = 3 ;
-            else if (c_mese == 'D')
-                mese = 4 ;
-            else if (c_mese == 'E')
-                mese = 5 ;
-            else if (c_mese == 'H')
-                mese = 6 ;
-            else if ( c_mese == 'L')
-                mese = 7 ;
-            else if ( c_mese == 'M' )
-                mese = 8;
-            else if ( c_mese == 'P' )
-                mese = 9;
-            else if ( c_mese == 'R'  )
-                mese = 10;
-            else if ( c_mese == 'S' )
-                mese = 11;
-            else if ( c_mese == 'T' )
-                mese = 12;
+            char [] array_mesi = new char[]{'A', 'B', 'C', 'D', 'E', 'H', 'L', 'M', 'P', 'R', 'S', 'T'};
+            for ( int j = 0; j < 12; j++ )
+                if ( array_mesi[j] == c_mese )
+                    mese = j + 1;
             if(Data.verificaData(giorno, mese) == false)
                 return false;
+
 
         }
         return true;
