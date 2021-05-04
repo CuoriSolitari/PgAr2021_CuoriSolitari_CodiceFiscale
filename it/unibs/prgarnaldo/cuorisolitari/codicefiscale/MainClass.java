@@ -43,14 +43,31 @@ public class MainClass {
                 XMLOutputFactory xmlof = null;
                 XMLStreamWriter xmlw = null;
                 try {
-                    xmlw.writeStartElement(String.valueOf(file));
+                    xmlw.writeStartElement("Output");
                     xmlw.writeComment("INIZIO LISTA");
-                    /*for (int i = 0; i < autori.length; i++) {
-                        xmlw.writeStartElement("autore");
+                    for (int i = 0; i < persone.size(); i++) {
+                        xmlw.writeStartElement("persona");
                         xmlw.writeAttribute("id", Integer.toString(i));
-                        xmlw.writeCharacters(autori[i]);
+                        xmlw.writeStartElement("nome");
+                        xmlw.writeCharacters(persone.get(i).getNome());
                         xmlw.writeEndElement();
-                    }*/
+                        xmlw.writeStartElement("cognome");
+                        xmlw.writeCharacters(persone.get(i).getCognome());
+                        xmlw.writeEndElement();
+                        xmlw.writeStartElement("sesso");
+                        if (persone.get(i).isSesso())
+                            xmlw.writeCharacters("M");
+                        else xmlw.writeCharacters("F");
+                        xmlw.writeEndElement();
+                        xmlw.writeStartElement("luogo");
+                        xmlw.writeCharacters(persone.get(i).getLuogo());
+                        xmlw.writeEndElement();
+                        xmlw.writeStartElement("data");
+                        xmlw.writeCharacters(persone.get(i).getData().toString());
+                        xmlw.writeEndElement();
+
+                        xmlw.writeEndElement();
+                    }
                     xmlw.writeEndElement();
                     xmlw.writeEndDocument();
                     xmlw.flush();

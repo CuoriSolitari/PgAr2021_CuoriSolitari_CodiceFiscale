@@ -14,6 +14,14 @@ public class Data {
         this.carattere_mese = carattereMese(_mese);
     }
 
+    @Override
+    public String toString() {
+        return
+                giorno + "-"
+                + mese + "-"
+                + anno;
+    }
+
     public static char carattereMese (int mese) {
         char [] array_mesi = new char[]{'A', 'B', 'C', 'D', 'E', 'H', 'L', 'M', 'P', 'R', 'S', 'T'};
         return array_mesi[mese - 1];
