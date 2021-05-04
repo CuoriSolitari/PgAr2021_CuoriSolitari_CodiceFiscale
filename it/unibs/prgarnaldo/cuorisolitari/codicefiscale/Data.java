@@ -57,4 +57,5 @@ public class Data {
     public char getCarattere_mese() {
         return carattere_mese;
     }
+
 }
